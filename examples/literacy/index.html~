@@ -1,0 +1,31 @@
+<html>
+<head>
+    <title>nepals - Examples Literacy Choropleth Zone Map</title>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="../nepal.js"></script>
+    <link href="../css/colorbrewer.css" rel="stylesheet">
+    <link href="../css/nepal.css" rel="stylesheet">
+</head>
+<body>
+<h1>Map of Nepal</h1>
+<script>
+    nepal.choroplethMap({
+        svgId: "map",
+        width: 800,
+        height: 480,
+        viewBox: "0 0 800 480",
+        preserveAspectRatio: "xMinXyMinY meet",
+        admLevelType: "zone",
+        nepalJsonPath: "topojson/nepal.json",
+        dataJsonPath: "literacy_zones.json",
+        range: 5,
+        quantitativeScale: "quantile",
+        colorScheme: "Greens",
+        title: "nepaljs",
+        legendTitle: "Literacy Rates (%)"
+    });
+</script>
+</body>
+</html>
