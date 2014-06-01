@@ -9,10 +9,10 @@ var nepal = (function () {
         svg = d3.select("#" + svgId);
 
         titleContainer = svg.append("g")
-            .attr("class", admLevelType + "-title");
+            .attr("class", "nj-" + admLevelType + "-title");
 
         titleContainer.append("text")
-            .attr("class", "svg-title")
+            .attr("class", "nj-svg-title")
             .attr("x", svgWidth - 10)
             .attr("y", 20)
             .text(title);
@@ -28,7 +28,7 @@ var nepal = (function () {
         maxRange = d3.max(d3.values(range));
 
         legendContainer = svg.append("g")
-            .attr("class", admLevelType + "-legend");
+            .attr("class", "nj-" + admLevelType + "-legend");
 
         legendContainer.selectAll("g")
             .data(range)
@@ -37,14 +37,14 @@ var nepal = (function () {
                 var g = d3.select(this);
 
                 g.append("rect")
-                    .attr("class", "legend-rect q" + d + "-" + (maxRange + 1))
+                    .attr("class", "nj-legend-rect q" + d + "-" + (maxRange + 1))
                     .attr("x", 15)
                     .attr("y", svgHeight - ((i + 1) * 20) - 10)
                     .attr("width", 15)
                     .attr("height", 15);
 
                 g.append("text")
-                    .attr("class", "legend-text")
+                    .attr("class", "nj-legend-text")
                     .attr("x", 40)
                     .attr("y", svgHeight - ((i + 1) * 20))
                     .attr("height", 15)
@@ -53,7 +53,7 @@ var nepal = (function () {
 
                 if (i === maxRange) {
                     g.append("text")
-                        .attr("class", "legend-title")
+                        .attr("class", "nj-legend-title")
                         .attr("x", 15)
                         .attr("y", svgHeight - ((maxRange + 2) * 20))
                         .attr("height", 15)
@@ -142,7 +142,7 @@ var nepal = (function () {
             translation = [(width - scale * (bounds[1][0] + bounds[0][0])) / 2, (height - scale * (bounds[1][1] + bounds[0][1])) / 2];
 
             container = svg.append("g")
-                .attr("class", admLevelType + "-container");
+                .attr("class", "nj-" + admLevelType + "-container");
 
             projection
                 .scale(scale)
@@ -152,7 +152,8 @@ var nepal = (function () {
 
                 var data = {},
                     min,
-                    max;
+                    max,
+                    zoom;
 
                 jsonData.forEach(function (d) {
                     data[d.id] = +d.value;
@@ -165,16 +166,36 @@ var nepal = (function () {
                     .domain([min, max])
                     .range(d3.range(range));
 
-                container.selectAll("." + admLevelType)
+                container.selectAll(".nj-" + admLevelType)
                     .data(admLevel.features)
                     .enter().append("path")
                     .attr("class", function (d) {
-                        return admLevelType + " q" + quantile(data[d.id]) + "-" + range;
+                        return "nj-" + admLevelType + " q" + quantile(data[d.id]) + "-" + range;
                     })
                     .attr("id", function (d) {
                         return admLevelType + "-" + d.id;
                     })
-                    .attr("d", path);
+                    .attr("d", path)
+                    .on("mouseover", function (d) {
+                        d3.select(this)
+                            .classed("nj-active", true);
+
+                        d3.select("body").append("div")
+                            .attr("class", "nj-tooltip")
+                            .html(d.properties.name + "<br //><b>" + data[d.id] + "<//b>")
+                            .transition()
+                            .duration(100)
+                            .style("left", (d3.event.pageX) + "px")
+                            .style("top", (d3.event.pageY) + "px");
+                    })
+                    .on("mouseout", function (d) {
+                        d3.select(this)
+                            .style("fill", null)
+                            .classed("nj-active", false);
+
+                        d3.selectAll(".nj-tooltip")
+                            .remove();
+                    });
 
                 addTitle(title, svgId, admLevelType, width, height);
                 addLegend(legendTitle, svgId, admLevelType, width, height, quantile.quantiles(), quantile.range());

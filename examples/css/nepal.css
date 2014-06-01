@@ -1,14 +1,31 @@
-.svg-title {
+.nj-svg-title {
     text-anchor: end;
 }
 
-.legend-rect {
+.nj-legend-rect {
 }
 
-.legend-text {
+.nj-legend-text {
     font-size: 11;
 }
 
-.legend-title {
+.nj-legend-title {
     font-size: 13;
+}
+
+.nj-tooltip {
+    position: absolute;
+    text-align: left;
+    border: 1px solid black;
+    opacity: 0.9;
+    padding: 4px;
+    font: 12px sans-serif;
+    background: white;
+    border-radius: 4px;
+    pointer-events: none;
+}
+
+.nj-active {
+    stroke: red;
+    stroke-width : 2px;
 }
