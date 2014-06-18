@@ -1,12 +1,12 @@
 <html>
 <head>
     <title>nepals - Examples Literacy Ktm Valley Zone Map</title>
-    <script src="jquery-1.11.1.min.js"></script>
-    <script src="d3.v3.min.js"></script>
-    <script src="topojson.v1.min.js"></script>
-    <script src="nepal.js"></script>
-    <link href="css/colorbrewer.css" rel="stylesheet">
-    <link href="css/nepal.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="../nepal.js"></script>
+    <link href="../css/colorbrewer.css" rel="stylesheet">
+    <link href="../css/nepal.css" rel="stylesheet">
 </head>
 <body>
 <script>
@@ -18,7 +18,7 @@
         preserveAspectRatio: "xMinXyMinY meet",
         subdivisionIds: ["20127", "20125", "20126"],
         admLevelType: "vdc",
-        nepalJsonPath: "topojson/nepal.json",
+        nepalJsonPath: "../topojson/nepal.json",
         dataJsonPath: "literacy_vdcs.json",
         range: 5,
         quantitativeScale: "quantile",
