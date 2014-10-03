@@ -99,9 +99,7 @@ var nepal = (function () {
         path = d3.geo.path()
             .projection(projection);
 
-        d3.json(nepalJsonPath)
-            .header("Content-Encoding", "gzip")
-            .get(function (error, npl) {
+        d3.json(nepalJsonPath, function (error, npl) {
             if (error) {
                 return console.error(error);
             }
@@ -183,9 +181,8 @@ var nepal = (function () {
                 .scale(scale)
                 .translate(translation);
 
-            d3.json(dataJsonPath)
-                    .header("Content-Encoding", "gzip")
-                    .get(function (jsonData) {
+            d3.json(dataJsonPath, function (jsonData) {
+
                 var data = {},
                     min,
                     max,
