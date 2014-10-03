@@ -13,8 +13,8 @@ var nepal = (function () {
 
         titleContainer.append("text")
             .attr("class", "nj-svg-title")
-            .attr("x", svgWidth - 10)
-            .attr("y", 20)
+            .attr("x", svgWidth / 2)
+            .attr("y", 15)
             .text(title);
     }
 
@@ -171,7 +171,7 @@ var nepal = (function () {
                 .translate([0, 0]);
 
             bounds = path.bounds(admLevel);
-            scale = 0.98 / Math.max((bounds[1][0] - bounds[0][0]) / width, (bounds[1][1] - bounds[0][1]) / height);
+            scale = 0.95 / Math.max((bounds[1][0] - bounds[0][0]) / width, (bounds[1][1] - bounds[0][1]) / height);
             translation = [(width - scale * (bounds[1][0] + bounds[0][0])) / 2, (height - scale * (bounds[1][1] + bounds[0][1])) / 2];
 
             container = svg.append("g")
