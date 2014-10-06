@@ -215,11 +215,11 @@ var nepal = (function () {
 
                         d3.select("body").append("div")
                             .attr("class", "nj-tooltip")
+                            .style("left", (d3.event.pageX) + "px")
+                            .style("top", (d3.event.pageY) + "px")
                             .html(d.properties.name + "<br //><b>" + data[d.id] + "<//b>")
                             .transition()
-                            .duration(100)
-                            .style("left", (d3.event.pageX) + "px")
-                            .style("top", (d3.event.pageY) + "px");
+                            .duration(100);
                     })
                     .on("mouseout", function (d) {
                         d3.select(this)
