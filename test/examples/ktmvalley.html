@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="jquery-1.11.1.min.js"></script>
+    <script src="d3.v3.min.js"></script>
+    <script src="topojson.v1.min.js"></script>
+    <script src="saveSvgAsPng.js"></script>
+    <script src="../nepal.js"></script>
+    <link href="../css/colorbrewer.css" rel="stylesheet">
+    <link href="../css/nepal.css" rel="stylesheet">
+</head>
+<body>
+<div style="position: absolute; width: 48vw; height: 98vh;">
+    <svg id="choropleth"></svg>
+</div>
+<div style="position: absolute; width: 48vw; height: 98vh; margin-left: 50vw">
+    <svg id="bubble"></svg>
+</div>
+<script>
+    nepal.createMap({
+        svgId: "#choropleth",
+        nepalTopojson: "../topojson/nepal.json",
+        data: "literacy_vdcs.json",
+        admLevel: "vdc",
+        subdivisionIds: ["20127", "20125", "20126"],
+        title: "Kathmandu Valley Literacy Rates (Census 2001)",
+        map: {
+            type: "choropleth",
+            quantitativeScaleType: "quantile",
+            range: 5,
+            colorScheme: "Blues",
+            legendTitle: "Literacy Rates (%)",
+            legendPosition: "bottom-left",
+            showTooltip: true
+        },
+        showToolbar: true
+    });
+
+    nepal.createMap({
+        svgId: "#bubble",
+        nepalTopojson: "../topojson/nepal.json",
+        data: "population_vdcs.json",
+        admLevel: "vdc",
+        subdivisionIds: ["20127", "20125", "20126"],
+        title: "Kathmandu Valley Population (Census 2001)",
+        map: {
+            type: "bubble",
+            range: [2, 50],
+            showTooltip: true,
+            legendTitle: "Population",
+            legendPosition: "bottom-left"
+        },
+        showToolbar: true
+    });
+</script>
+</body>
+</html>
