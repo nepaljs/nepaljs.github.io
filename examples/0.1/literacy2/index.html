@@ -1,10 +1,10 @@
 <html>
 <head>
-    <title>nepals-0.1.0 - Examples Literacy Choropleth Zone Map - 2001</title>
+    <title>nepals-0.1.0 - Examples Literacy Ktm Valley Map - 2001</title>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="http://d3js.org/topojson.v1.min.js"></script>
-    <script src="../nepal-0.1.0.js"></script>
+    <script src="../nepal-0.1.1.js"></script>
     <link href="../css/colorbrewer.css" rel="stylesheet">
     <link href="../css/nepal.css" rel="stylesheet">
 </head>
@@ -12,17 +12,18 @@
 <script>
     nepal.choroplethMap({
         svgId: "map",
-        width: 800,
-        height: 480,
-        viewBox: "0 0 800 480",
+        width: 600,
+        height: 700,
+        viewBox: "0 0 600 700",
         preserveAspectRatio: "xMinXyMinY meet",
-        admLevelType: "zone",
+        subdivisionIds: ["20127", "20125", "20126"],
+        admLevelType: "vdc",
         nepalJsonPath: "../topojson/nepal.json",
-        dataJsonPath: "literacy_zones.json",
+        dataJsonPath: "literacy_vdcs.json",
         range: 5,
         quantitativeScale: "quantile",
-        colorScheme: "Greens",
-        title: "Zone Wise Literacy Rates (Census 2001)",
+        colorScheme: "Blues",
+        title: "Kathmandu Valley Literacy Rates (Census 2001)",
         legendTitle: "Literacy Rates (%)"
     });
 </script>
