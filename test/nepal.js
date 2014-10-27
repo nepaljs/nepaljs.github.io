@@ -230,7 +230,7 @@ var nepal = (function () {
 
         var twoPi = 2 * Math.PI,
             progress = 0,
-            total = 1308573,
+            total = 1443154,
             formatPercent = d3.format(".0%");
 
         var arc = d3.svg.arc()
@@ -258,8 +258,8 @@ var nepal = (function () {
             .on("progress", function () {
                 var i = d3.interpolate(progress, d3.event.loaded / total);
 
-                d3.transition().tween("progress", function() {
-                    return function(t) {
+                d3.transition().tween("progress", function () {
+                    return function (t) {
                         progress = i(t);
                         foreground.attr("d", arc.endAngle(twoPi * progress));
                         text.text(formatPercent(progress));
@@ -268,6 +268,8 @@ var nepal = (function () {
             })
             .get(function (error, npl) {
                 if (error) return console.error(error);
+
+                d3.select(".nj-map-progress-meter").remove();
 
                 var admLevelFeature,
                     admLevelMesh;
@@ -574,10 +576,10 @@ var nepal = (function () {
                         .style("padding", "4px")
                         .html(
                             "<input type=\"button\"/ class=\"nj-nav-button\" id=\"nj-nav-button-plus\" value=\"+\" title=\"zoom in\"><br/>" +
-                            "<input type=\"button\"/ class=\"nj-nav-button\" id=\"nj-nav-button-home\" value=\"&#8632\" title=\"reset\"><br/>" +
-                            "<input type=\"button\"/ class=\"nj-nav-button\" id=\"nj-nav-button-minus\" value=\"-\" title=\"zoom out\"><br />" +
-                            "<input type=\"button\"/ class=\"nj-nav-button\" id=\"nj-nav-button-download\" value=\"&#10515;\" title=\"download\">"
-                    );
+                                "<input type=\"button\"/ class=\"nj-nav-button\" id=\"nj-nav-button-home\" value=\"&#8632\" title=\"reset\"><br/>" +
+                                "<input type=\"button\"/ class=\"nj-nav-button\" id=\"nj-nav-button-minus\" value=\"-\" title=\"zoom out\"><br />" +
+                                "<input type=\"button\"/ class=\"nj-nav-button\" id=\"nj-nav-button-download\" value=\"&#10515;\" title=\"download\">"
+                        );
 
                     var toolbarContainer = d3.select(svgId).select(".nj-foreign-object").select("div");
 
@@ -681,10 +683,10 @@ var nepal = (function () {
                             .style("left", width / 2 - 100 + "px")
                             .html(
                                 "<b>Name:</b> <input type=\"text\" size=\"10\" id=\"" + svgId.replace(/^#/, "") + "-name\" /><br />" +
-                                "<b>Scale:</b> <input type=\"text\"size=\"10\" id=\"" + svgId.replace(/^#/, "") + "-scale\" /><br />" +
-                                "<input type=\"button\" id=\"" + svgId.replace(/^#/, "") + "-download\" value=\"Download\" />" +
-                                "<input type=\"button\" id=\"" + svgId.replace(/^#/, "") + "-close\" value=\"Close\" />"
-                        );
+                                    "<b>Scale:</b> <input type=\"text\"size=\"10\" id=\"" + svgId.replace(/^#/, "") + "-scale\" /><br />" +
+                                    "<input type=\"button\" id=\"" + svgId.replace(/^#/, "") + "-download\" value=\"Download\" />" +
+                                    "<input type=\"button\" id=\"" + svgId.replace(/^#/, "") + "-close\" value=\"Close\" />"
+                            );
 
                         $(svgId + "-download").click(function (e) {
                             e.preventDefault();
