@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="/style.css">
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="d3.v3.min.js"></script>
+    <script src="topojson.v1.min.js"></script>
+    <script src="pngexport.min.js"></script>
+    <script src="nepal.min.js"></script>
+    <link href="css/colorbrewer.min.css" rel="stylesheet">
+    <link href="css/nepal.min.css" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar navbar-inverse" role="navigation" id="ui-navbar">
@@ -24,25 +30,36 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/index.html">Overview</a></li>
-                <li><a href="/examples">Examples</a></li>
+                <li><a href="/index.html">Overview</a></li>
+                <li class="active"><a href="/examples">Examples</a></li>
             </ul>
         </div>
     </div>
 </nav>
 <div class="container">
-    <h1>Nepal.js</h1>
-
-    <p><b>Nepal.js</b> is a JavaScript based thematic mapping tool to show various themes (social, political, cultural,
-        economic, sociological, agricultural) connected with geographic areas of Nepal.</p>
-
-    <h2>Features</h2>
-    <ul>
-        <li>interactive visualization of various themes in choropleth and bubble maps</li>
-        <li>supports various administrative regions (zones, districts and vdcs)</li>
-        <li>export maps as image</li>
-    </ul>
-
+    <h2>Kathmandu Valley Literacy Rates (Census 2001)</h2>
+    <div style="width: 600px; height: 600px">
+    <svg id="choropleth"></svg>
+        </div>
 </div>
+<script>
+    nepal.createMap({
+        svgId: "#choropleth",
+        nepalTopojson: "topojson/nepal.json",
+        data: "literacy_vdcs_2001.json",
+        admLevel: "vdc",
+        subdivisionIds: ["20127", "20125", "20126"],
+        map: {
+            type: "choropleth",
+            quantitativeScaleType: "quantile",
+            range: 5,
+            colorScheme: "Blues",
+            legendTitle: "Literacy Rates (%)",
+            legendPosition: "bottom-left",
+            showTooltip: true
+        },
+        showToolbar: true
+    });
+</script>
 </body>
 </html>
